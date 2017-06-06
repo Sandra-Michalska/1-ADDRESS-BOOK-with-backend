@@ -159,6 +159,34 @@ function editAddress() {
 }
 
 $(document).ready(function() {
+
+    var name1, password1;
+    $("#submit1").click(function() {
+        name1 = $("#name1").val();
+        password1 = $("#password1").val();
+
+        var dataFrontend = {
+            name1: name1,
+            password1: password1
+        };
+        var url = 'http://localhost:3000';
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: dataFrontend,
+            dataType: 'json',
+            error: function() {
+                console.log('error');
+            },
+            success: function(dataServer) {
+                console.log('success');
+                console.log(dataServer);
+                $('#heading h1').text(JSON.stringify(dataServer.name1));
+            }
+        });
+    });
+
     displayFromLocalStorage();
     addFirstAddress();
 
