@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Address book app</title>
+        <meta name="description" content="A simple address book">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p>You are using an outdated browser. Please upgrade your browser to improve your experience and security.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+            <div id="heading">
+                <h1 class="color">Address book</h1>
+                <form>
+                    <input type="text" placeholder="Find an address...">
+                    <select name="sort-options">
+                        <option value="sort" selected="selected" disabled="disabled">Sort...</option>
+                        <option value="alphabetically">Alphabetically</option>
+                        <option value="newest-first">Newest first</option>
+                        <option value="oldest-first">Oldest first</option>
+                    </select>
+                </form>
+            </div>
+            <div id="lists">
+                <div id="addresses">
+                    <div id="addresses-heading">
+                        <h2>Your addresses</h2>
+                        <input type="button" value="Add an address" id="button-add-address">
+                    </div>
+                    <div id="address-wrapper">
+                        <!-- Addresses appear here -->
+                    </div>
+                </div>
+                <div id="groups">
+                    <h2>Groups</h2>
+                    <div id="group-choice">
+                        <p><input type="checkbox" name="group-all" value="All groups"> All addresses</p>
+                        <p><input type="checkbox" name="group-1" value="Group 1"> Group 1</p>
+                        <p><input type="checkbox" name="group-2" value="Group 2"> Group 2</p>
+                        <p><input type="checkbox" name="group-3" value="Group 3"> Group 3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>
