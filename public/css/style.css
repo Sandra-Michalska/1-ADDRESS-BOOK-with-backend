@@ -194,16 +194,22 @@ div #group-choice p:last-of-type {
     width: 45%;
 }
 
-
-#addFirstAddress {
+/*  */
+#addFirstAddressText {
     padding: 0 0 0 2.1em;
     font-style: italic;
     font-weight: 400;
     color: #93224b;
+    display: block;
 }
 
-#fill-in-fields {
+#fill-in-fields-text {
     padding-top: 2.5em;
     color: #ff0000;
     font-weight: 700;
+    display: none;
+}
+
+#addAddressForm {
+    display: none;
 }
