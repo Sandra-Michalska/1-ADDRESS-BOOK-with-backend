@@ -1,6 +1,8 @@
+var displayOnce = 0;
+
 // Show/hide HTML elements, disable/enable buttons
 function toggles(toggleAddressForm, firstAddressTextToggle, buttonsDisable, fillFieldsTextToggle) {
-      $('#addAddressForm').css('display', toggleAddressForm);
+      $('#addressForm').css('display', toggleAddressForm);
       $('#addFirstAddressText').css('display', firstAddressTextToggle);
       $('#button-add-address, .button-edit, .button-delete').prop('disabled', buttonsDisable);
       $('#fill-in-fields-text').css('display', fillFieldsTextToggle);
@@ -8,38 +10,31 @@ function toggles(toggleAddressForm, firstAddressTextToggle, buttonsDisable, fill
 
 // Clear text input fields
 function clearFields() {
-    $('#add-address-name, #add-address-phone, #add-address-address').val('');
+    $('.add-address-fields').val('');
 }
 
 // Display a form for adding addresses
 function addAddress() {
+    displayOnce = 0;
     toggles('block', 'none', true, 'none');
 }
 
 // Cancel adding an address
 function addAddressCancel() {
-    function firstAddressTextToggle() {
-        if($('#address-wrapper').children().length) { // todo
-            return 'none';
-        } else {
-            return 'block';
-        }
-    }
-
-    toggles('none', firstAddressTextToggle() , false, 'none');
+    var firstAddressTextToggle = $('#address-wrapper').children().length ? 'none' : 'block';
+    toggles('none', firstAddressTextToggle , false, 'none');
     clearFields();
-    displayOnce = 0;
 }
 
 // Save an address
-var displayOnce = 0;
 function saveAddress(e) {
-    displayOnce = 0;
-    var name = $('#add-address-name').val();
-    var phone = $('#add-address-phone').val();
-    var address = $('#add-address-address').val();
+    var addressData = {
+        name: $('#add-address-name').val(),
+        phone: $('#add-address-phone').val(),
+        address: $('#add-address-address').val()
+    }
 
-    if(name == '' || phone == '' || address == '') { // todo
+    if(!addressData.name || !addressData.phone || !addressData.address) {
         if(displayOnce <= 0) {
             toggles('block', 'none', true, 'block');
             displayOnce++;
@@ -47,51 +42,48 @@ function saveAddress(e) {
         e.preventDefault();
     } else {
         toggles('none', 'none', false, 'none');
-        $('#add-address-name, #add-address-phone, #add-address-address').val('');
-
-        var addressData = {
-            name: name,
-            phone: phone,
-            address: address
-        }
-
-        serverCommunication(addressData);
+        clearFields();
+        sendDataToServer(addressData);
     }
 }
 
 // Delete an address
-function deleteAddress() {
-
+function deleteAddress(e) {
+    console.log('delete');
+    $(e.target).parent().remove();
 }
 
 // Edit an address
-function editAddress() {
-
+function editAddress(e) {
+    console.log('edit');
+    // templates
 }
 
 // Save an edited address
 function editAddressSave() {
-
+    // templates
 }
 
 // Cancel editing an address
 function editAddressCancel() {
-
+    // templates
 }
 
 // Send address data to the server
-function serverCommunication(addressData) {
+function sendDataToServer(addressData) {
     $.ajax({
         type: 'post',
         url: 'http://localhost:3000',
         data: addressData,
-        dataType: 'text', // todo
-        error: function() {
-            console.log('error');
+        dataType: 'json',
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Error: ' + textStatus + '\n' + errorThrown);
         },
-        success: function(addressDataDiv) {
-            console.log(addressDataDiv);
-            $('#address-wrapper').prepend(addressDataDiv);
+        success: function(serverData) {
+            $('#address-wrapper').prepend(serverData.addressDataDiv);
+            var addressDivPlusCounter = '#address-div-' + serverData.addressDivCounter;
+            $(addressDivPlusCounter).children('.button-edit').on('click', editAddress); // templates!!!
+            $(addressDivPlusCounter).children('.button-delete').on('click', deleteAddress); // templates!!!
         }
     });
 }
@@ -100,6 +92,6 @@ $(document).ready(function() {
     $('#button-add-address').on('click', addAddress);
     $('.button-delete').on('click', deleteAddress);
     $('.button-edit').on('click', editAddress);
-    $('#addAddressForm').children('.button-save').on('click', saveAddress);
-    $('#addAddressForm').children('.button-cancel').on('click', addAddressCancel);
+    $('.button-save').on('click', saveAddress); // another button-save and button-cancel in edit? templates!
+    $('.button-cancel').on('click', addAddressCancel);
 });

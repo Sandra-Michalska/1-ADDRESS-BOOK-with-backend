@@ -94,35 +94,40 @@ div #addresses-heading {
     position: relative;
 }
 
-div .address-no,
+div .address-div,
+div .address-form,
 div #groups {
     background: #e8e8e8;
 }
 
-div .address-no {
+div .address-div,
+div .address-form {
     position: relative;
     margin: 0 auto 1em;
 }
 
-div .address-no p {
+div .address-div p,
+div .address-form p {
     margin: 0.5em 0 0.5em 4em;
 }
 
-div .address-no .input-field {
+div .address-form .input-field {
     margin: 0.5em 0 1.1em 4em;
     line-height: 1.8em;
 }
 
-div .address-no .checkbox {
+div .address-form .checkbox {
     margin: 0 0 0.4em 5em;
 }
 
-div .address-no > img + p {
+div .address-div > img + p,
+div .address-form > img + p {
     padding-top: 3em;
     font-weight: 600;
 }
 
-div .address-no p:last-of-type {
+div .address-div p:last-of-type,
+div .address-form p:last-of-type {
     margin-bottom: 1em;
     padding-bottom: 2em;
 }
@@ -158,7 +163,9 @@ div .address-no p:last-of-type {
     left: 70%;
 }
 
-div .address-no img {
+
+div .address-div img,
+div .address-form img {
     position: absolute;
     top: 20%;
     right: 3em;
@@ -184,7 +191,7 @@ div #group-choice p:last-of-type {
 }
 
 
-.address-no input[type="text"] {
+.address-form input[type="text"] { /* class! */
     position: absolute;
     right: 10%;
     padding: 5.2px;
@@ -210,6 +217,6 @@ div #group-choice p:last-of-type {
     display: none;
 }
 
-#addAddressForm {
+#addressForm {
     display: none;
 }

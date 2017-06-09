@@ -20,14 +20,15 @@ app.get('/', function (req, res) {
     res.sendFile('public/index.html', {'root': __dirname});
 });
 
+var addressDivCounter = 0;
 app.post('/', function(req, res) {
     var name = req.body.name;
     var phone = req.body.phone;
     var address = req.body.address;
 
-    // todo
+    // todo - template!
     var addressDataDiv =
-        '<div class="address-no" id="counter">' +
+        '<div class="address-div" id="address-div-' + addressDivCounter + '">' +
             '<img src="img/photo-name.png" alt="photo-alt">' +
 
             '<p>' + name + '</p>' +
@@ -39,7 +40,8 @@ app.post('/', function(req, res) {
             '<input type="image" src="img/delete.jpg" alt="delete" class="button-delete">' +
         '</div>';
 
-    res.send(addressDataDiv);
+    res.send({addressDataDiv: addressDataDiv, addressDivCounter: addressDivCounter});
+    addressDivCounter++;
 });
 
 // Run the server
