@@ -8,6 +8,12 @@ function toggles(toggleAddressForm, firstAddressTextToggle, buttonsDisable, fill
       $('#fill-in-fields-text').css('display', fillFieldsTextToggle);
 }
 
+// Show or hide the "Add your first address" text
+function firstAddressTextToggle() {
+    var firstAddressTextToggle = $('#address-wrapper').children().length ? 'none' : 'block';
+    toggles('none', firstAddressTextToggle , false, 'none');
+}
+
 // Clear text input fields
 function clearFields() {
     $('.add-address-fields').val('');
@@ -21,9 +27,8 @@ function addAddress() {
 
 // Cancel adding an address
 function addAddressCancel() {
-    var firstAddressTextToggle = $('#address-wrapper').children().length ? 'none' : 'block';
-    toggles('none', firstAddressTextToggle , false, 'none');
     clearFields();
+    firstAddressTextToggle();
 }
 
 // Save an address
@@ -51,6 +56,7 @@ function saveAddress(e) {
 function deleteAddress(e) {
     console.log('delete');
     $(e.target).parent().remove();
+    firstAddressTextToggle();
 }
 
 // Edit an address
