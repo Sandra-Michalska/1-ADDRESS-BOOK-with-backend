@@ -116,6 +116,10 @@ div .address-form .input-field {
     line-height: 1.8em;
 }
 
+#input-field-first {
+    padding: 2.2em 0 0;
+}
+
 div .address-form .checkbox {
     margin: 0 0 0.4em 5em;
 }

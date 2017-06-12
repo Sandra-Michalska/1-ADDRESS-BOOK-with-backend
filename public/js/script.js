@@ -1,5 +1,3 @@
-var displayOnce = 0;
-
 // Show/hide HTML elements, disable/enable buttons
 function toggles(toggleAddressForm, firstAddressTextToggle, buttonsDisable, fillFieldsTextToggle) {
       $('#addressForm').css('display', toggleAddressForm);
@@ -20,6 +18,7 @@ function clearFields() {
 }
 
 // Display a form for adding addresses
+var displayOnce;
 function addAddress() {
     displayOnce = 0;
     toggles('block', 'none', true, 'none');
@@ -32,11 +31,13 @@ function addAddressCancel() {
 }
 
 // Save an address
+var addressDivCounter = 0;
 function saveAddress(e) {
     var addressData = {
         name: $('#add-address-name').val(),
         phone: $('#add-address-phone').val(),
-        address: $('#add-address-address').val()
+        address: $('#add-address-address').val(),
+        addressDivId: 'address-div-' + addressDivCounter
     }
 
     if(!addressData.name || !addressData.phone || !addressData.address) {
@@ -54,7 +55,6 @@ function saveAddress(e) {
 
 // Delete an address
 function deleteAddress(e) {
-    console.log('delete');
     $(e.target).parent().remove();
     firstAddressTextToggle();
 }
@@ -76,28 +76,32 @@ function editAddressCancel() {
 }
 
 // Send address data to the server
+var addressDivId;
 function sendDataToServer(addressData) {
     $.ajax({
         type: 'post',
         url: 'http://localhost:3000',
         data: addressData,
-        dataType: 'json',
+        dataType: 'text',
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log('Error: ' + textStatus + '\n' + errorThrown);
+            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
         },
         success: function(serverData) {
-            $('#address-wrapper').prepend(serverData.addressDataDiv);
-            var addressDivPlusCounter = '#address-div-' + serverData.addressDivCounter;
-            $(addressDivPlusCounter).children('.button-edit').on('click', editAddress); // templates!!!
-            $(addressDivPlusCounter).children('.button-delete').on('click', deleteAddress); // templates!!!
+            console.log('Ajax success');
+            $('#address-wrapper').prepend(serverData);
+
+            addressDivId = '#address-div-' + addressDivCounter;
+            $(addressDivId).children('.button-edit').on('click', editAddress); // function?
+            $(addressDivId).children('.button-delete').on('click', deleteAddress);
+            addressDivCounter++;
         }
     });
 }
 
 $(document).ready(function() {
     $('#button-add-address').on('click', addAddress);
-    $('.button-delete').on('click', deleteAddress);
     $('.button-edit').on('click', editAddress);
-    $('.button-save').on('click', saveAddress); // another button-save and button-cancel in edit? templates!
+    $('.button-delete').on('click', deleteAddress);
+    $('.button-save').on('click', saveAddress);
     $('.button-cancel').on('click', addAddressCancel);
 });
