@@ -95,50 +95,65 @@ div #addresses-heading {
 }
 
 div .address-div,
-div .address-form,
+div #address-form-add,
+div #address-form-edit,
 div #groups {
     background: #e8e8e8;
 }
 
 div .address-div,
-div .address-form {
+div #address-form-add,
+div #address-form-edit {
     position: relative;
     margin: 0 auto 1em;
 }
 
 div .address-div p,
-div .address-form p {
+div #address-form-add p,
+div #address-form-edit p {
     margin: 0.5em 0 0.5em 4em;
 }
 
-div .address-form .input-field {
+div #address-form-add .input-field,
+div #address-form-edit .input-field {
     margin: 0.5em 0 1.1em 4em;
     line-height: 1.8em;
 }
 
-#input-field-first {
+.input-field-first {
     padding: 2.2em 0 0;
 }
 
-div .address-form .checkbox {
+div #address-form-edit .checkbox,
+div #address-form-add .checkbox {
     margin: 0 0 0.4em 5em;
 }
 
-div .address-div > img + p,
-div .address-form > img + p {
-    padding-top: 3em;
-    font-weight: 600;
-}
-
 div .address-div p:last-of-type,
-div .address-form p:last-of-type {
+div #address-form-add p:last-of-type,
+div #address-form-edit p:last-of-type {
     margin-bottom: 1em;
     padding-bottom: 2em;
 }
 
+div .address-div img,
+div #address-form-add img {
+    position: absolute;
+    top: 20%;
+    right: 3em;
+}
+
+div .address-div > img + p,
+div #address-form-add > img + p,
+div #address-form-edit > img + p {
+    padding-top: 3em;
+    font-weight: 600;
+}
+
 .button-edit,
 .button-delete,
-.button-save
+.button-save,
+.button-edit-save
 {
     outline: none;
 }
@@ -155,24 +170,18 @@ div .address-form p:last-of-type {
     right: 14em;
 }
 
-.button-save {
+.button-save,
+.button-edit-save {
     position: absolute;
     bottom: 2.5em;
     left: 60%;
 }
 
-.button-cancel {
+.button-cancel,
+.button-edit-cancel {
     position: absolute;
     bottom: 2.5em;
     left: 70%;
-}
-
-
-div .address-div img,
-div .address-form img {
-    position: absolute;
-    top: 20%;
-    right: 3em;
 }
 
 /* GROUPS */
@@ -195,7 +204,8 @@ div #group-choice p:last-of-type {
 }
 
 
-.address-form input[type="text"] { /* class! */
+#address-form-add input[type="text"], /* class! */
+#address-form-edit input[type="text"] { /* class! */
     position: absolute;
     right: 10%;
     padding: 5.2px;
@@ -221,6 +231,10 @@ div #group-choice p:last-of-type {
     display: none;
 }
 
-#addressForm {
+#address-form-add {
+    display: none;
+}
+
+#address-form-edit {
     display: none;
 }

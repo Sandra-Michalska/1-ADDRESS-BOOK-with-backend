@@ -3,8 +3,8 @@ var bodyParser = require('body-parser');
 var sqlite3 = require('sqlite3').verbose();
 
 var db = new sqlite3.Database('database/db');
-
 var app = express();
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -17,12 +17,13 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function(req, res) {
-    var name = req.body.name;
-    var phone = req.body.phone;
-    var address = req.body.address;
-    var addressDivId = req.body.addressDivId;
-
-    res.render('new-address', { addressDivId: addressDivId, name: name, phone: phone, address: address });
+    var addressData = {
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        addressDivId: req.body.addressDivId
+    }
+    res.render('new-address', { addressData });
 });
 
 app.listen(3000, function() {
