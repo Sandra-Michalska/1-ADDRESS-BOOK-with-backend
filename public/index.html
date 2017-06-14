@@ -13,11 +13,11 @@
         <![endif]-->
 
         <div id="wrapper">
-            <div id="heading">
-                <h1 class="color">Address book</h1>
-                <form>
-                    <input type="text" placeholder="Find an address...">
-                    <select name="sort-options">
+            <div class="header">
+                <h1 class="header__h1">Address book</h1>
+                <form class="form-find-sort">
+                    <input class="form-find-sort__find" type="text" placeholder="Find an address...">
+                    <select class="form-find-sort__sort" name="sort-options">
                         <option value="sort" selected="selected" disabled="disabled">Sort...</option>
                         <option value="alphabetically">Alphabetically</option>
                         <option value="newest-first">Newest first</option>
@@ -25,16 +25,16 @@
                     </select>
                 </form>
             </div>
-            <div id="lists">
-                <div id="addresses">
-                    <div id="addresses-heading">
-                        <h2>Your addresses</h2>
-                        <input type="button" value="Add an address" id="button-add-address">
+            <div id="content">
+                <div id="addresses-wrapper">
+                    <div id="addresses-header">
+                        <h2 class="addresses-header__heading">Your addresses</h2>
+                        <input class="addresses-header__button" type="button" value="Add an address" id="button-add-address">
                     </div>
-                    <div id="address-form-div">
-                        <p id="addFirstAddressText">Add your first address...</p>
-                        <div id="address-form-add">
-                            <p id="fill-in-fields-text">Please fill in all of the fields!</p>
+                    <div class="address-form-wrapper">
+                        <p class="address-form-wrapper__text">Add your first address...</p>
+                        <div class="address-form-add">
+                            <p class="address-form-add__text">Please fill in all of the fields!</p>
 
                             <p class="input-field input-field-first">First and last name <input type="text" placeholder="First and last name" id="add-address-name" class="add-address-fields"></p> <!-- labels! -->
                             <p class="input-field">Phone <input type="text" placeholder="Phone" id="add-address-phone" class="add-address-fields"></p>

@@ -1,7 +1,7 @@
 // Show/hide HTML elements, disable/enable buttons (for adding addresses)
 function togglesAdd(addressForm, buttons, text) {
-    $('#address-form-add').css('display', addressForm);
-    $('#fill-in-fields-text').css('display', text);
+    $('.address-form-add').css('display', addressForm);
+    $('.address-form-add__text').css('display', text);
     $('#button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
 }
 
@@ -14,8 +14,8 @@ function togglesEdit(editedAddress, editedAddressToggle, addressForm, buttons) {
 
 // Show or hide the "Add your first address" text
 function firstAddressTextToggle() {
-    var textToggle = $('#address-form-add').css('display') == 'block' || $('#address-wrapper').find('.address-div').length ? 'none' : 'block';
-    $('#addFirstAddressText').css('display', textToggle);
+    var textToggle = $('.address-form-add').css('display') == 'block' || $('#address-wrapper').find('.address-div').length ? 'none' : 'block';
+    $('.address-form-wrapper__text').css('display', textToggle);
 }
 
 // Clear text input fields

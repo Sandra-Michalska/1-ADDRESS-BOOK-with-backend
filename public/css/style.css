@@ -6,34 +6,54 @@ body {
     color: #4e4848;
 }
 
-h1, h2 {
-    margin: 0;
-    letter-spacing: 0.03em;
+.header {
+    margin-bottom: 2em;
+    background: #93224b;
+    position: relative;
 }
 
-h1 {
+.header__h1 {
+    margin: 0;
     padding: 1.2em 0 1.8em 2em;
+    letter-spacing: 0.03em;
     color: #fff;
 }
 
-h2 {
-    padding: 1.3em;
+.form-find-sort {
+    position: absolute;
+    bottom: 0.7em;
+    right: 0.7em;
 }
 
-input[type="button"],
-input[type="text"],
-div #heading form select {
-    outline: none;
+.addresses-header__button,
+.form-find-sort__find,
+.form-find-sort__sort {
+    border: 1px solid #5a4f4f;
+    border-radius: 2px;
 }
 
-input[type="button"] {
-    padding: 0.4em 0.9em;
+.form-find-sort__find {
+    margin-right: 1em;
+    padding: 5.2px;
     font-size: 0.9em;
-    background: #ececec;
 }
 
-input[type="button"]:hover {
-    background: #dcdcdc;
+.form-find-sort__sort {
+    padding: 4.7px;
+    font-size: 0.9em;
+}
+
+addresses-header__heading,
+h2 {
+    margin: 0;
+    padding: 1.3em;
+    letter-spacing: 0.03em;
+}
+
+.addresses-header__button,
+.form-find-sort__find,
+.form-find-sort__sort {
+    outline: none;
 }
 
 input[type="checkbox"] {
@@ -43,35 +63,6 @@ input[type="checkbox"] {
     height: 1.2em;
 }
 
-div #heading {
-    margin-bottom: 2em;
-    background: #93224b;
-    position: relative;
-}
-
-div #heading form {
-    position: absolute;
-    bottom: 0.7em;
-    right: 0.7em;
-}
-
-input[type="button"],
-div #heading form input[type="text"],
-div #heading form select {
-    border: 1px solid #5a4f4f;
-    border-radius: 2px;
-}
-
-div #heading form input[type="text"] {
-    margin-right: 1em;
-    padding: 5.2px;
-    font-size: 0.9em;
-}
-
-div #heading form select {
-    padding: 4.7px;
-    font-size: 0.9em;
-}
 
 #button-add-address {
     position: absolute;
@@ -84,37 +75,37 @@ div #heading form select {
 }
 
 /* ADDRESSES */
-div #addresses {
+#addresses-wrapper {
     position: absolute;
     left: 3%;
     width: 60%;
 }
 
-div #addresses-heading {
+div #addresses-header {
     position: relative;
 }
 
 div .address-div,
-div #address-form-add,
+.address-form-add,
 div #address-form-edit,
 div #groups {
     background: #e8e8e8;
 }
 
 div .address-div,
-div #address-form-add,
+.address-form-add,
 div #address-form-edit {
     position: relative;
     margin: 0 auto 1em;
 }
 
 div .address-div p,
-div #address-form-add p,
+.address-form-add p,
 div #address-form-edit p {
     margin: 0.5em 0 0.5em 4em;
 }
 
-div #address-form-add .input-field,
+.address-form-add .input-field,
 div #address-form-edit .input-field {
     margin: 0.5em 0 1.1em 4em;
     line-height: 1.8em;
@@ -125,26 +116,26 @@ div #address-form-edit .input-field {
 }
 
 div #address-form-edit .checkbox,
-div #address-form-add .checkbox {
+.address-form-add .checkbox {
     margin: 0 0 0.4em 5em;
 }
 
 div .address-div p:last-of-type,
-div #address-form-add p:last-of-type,
+.address-form-add p:last-of-type,
 div #address-form-edit p:last-of-type {
     margin-bottom: 1em;
     padding-bottom: 2em;
 }
 
 div .address-div img,
-div #address-form-add img {
+.address-form-add img {
     position: absolute;
     top: 20%;
     right: 3em;
 }
 
 div .address-div > img + p,
-div #address-form-add > img + p,
+.address-form-add > img + p,
 div #address-form-edit > img + p {
     padding-top: 3em;
     font-weight: 600;
@@ -204,7 +195,7 @@ div #group-choice p:last-of-type {
 }
 
 
-#address-form-add input[type="text"], /* class! */
+.address-form-add input[type="text"], /* class! */
 #address-form-edit input[type="text"] { /* class! */
     position: absolute;
     right: 10%;
@@ -216,7 +207,7 @@ div #group-choice p:last-of-type {
 }
 
 /*  */
-#addFirstAddressText {
+.address-form-wrapper__text {
     padding: 0 0 0 2.1em;
     font-style: italic;
     font-weight: 400;
@@ -224,14 +215,14 @@ div #group-choice p:last-of-type {
     display: block;
 }
 
-#fill-in-fields-text {
+.address-form-add__text {
     padding-top: 2.5em;
     color: #ff0000;
     font-weight: 700;
     display: none;
 }
 
-#address-form-add {
+.address-form-add {
     display: none;
 }
 
