@@ -14,10 +14,10 @@
 
         <div id="wrapper">
             <div class="header">
-                <h1 class="header__h1">Address book</h1>
+                <h1 class="header__h1 margin-0">Address book</h1>
                 <form class="form-find-sort">
-                    <input class="form-find-sort__find" type="text" placeholder="Find an address...">
-                    <select class="form-find-sort__sort" name="sort-options">
+                    <input class="form-find-sort__find outline-none border" type="text" placeholder="Find an address...">
+                    <select class="form-find-sort__sort outline-none border" name="sort-options">
                         <option value="sort" selected="selected" disabled="disabled">Sort...</option>
                         <option value="alphabetically">Alphabetically</option>
                         <option value="newest-first">Newest first</option>
@@ -28,52 +28,101 @@
             <div id="content">
                 <div id="addresses-wrapper">
                     <div id="addresses-header">
-                        <h2 class="addresses-header__heading">Your addresses</h2>
-                        <input class="addresses-header__button" type="button" value="Add an address" id="button-add-address">
+                        <h2 class="h2 margin-0">Your addresses</h2>
+                        <input class="button-add-address outline-none border" type="button" value="Add an address">
                     </div>
-                    <div class="address-form-wrapper">
-                        <p class="address-form-wrapper__text">Add your first address...</p>
-                        <div class="address-form-add">
+                    <div id="address-form-wrapper">
+                        <p class="address-form-wrapper__text">You haven't added any addresses yet.<br>Click on the button above to add your first address.</p>
+                        <div class="address-form-add bg-gray relative-margin">
                             <p class="address-form-add__text">Please fill in all of the fields!</p>
 
-                            <p class="input-field input-field-first">First and last name <input type="text" placeholder="First and last name" id="add-address-name" class="add-address-fields"></p> <!-- labels! -->
-                            <p class="input-field">Phone <input type="text" placeholder="Phone" id="add-address-phone" class="add-address-fields"></p>
-                            <p class="input-field">Address <input type="text" placeholder="Address" id="add-address-address" class="add-address-fields"></p>
+                            <div class="address-data">
+                                <div class="input-div">
+                                    <label for="add-address-name" class="input-label">First and last name</label>
+                                    <input type="text" placeholder="First and last name" id="add-address-name" class="add-address-fields">
+                                </div>
+                                <div class="input-div">
+                                    <label for="add-address-phone" class="input-label">Phone</label>
+                                    <input type="text" placeholder="Phone" id="add-address-phone" class="add-address-fields">
+                                </div>
+                                <div class="input-div">
+                                    <label for="add-address-address" class="input-label">Address</label>
+                                    <input type="text" placeholder="Address" id="add-address-address" class="add-address-fields">
+                                </div>
+                            </div>
 
-                            <p>Group(s)</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="All groups" id="checkbox-all"> All addresses</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="Group 1" id="checkbox-group1"> Group 1</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="Group 2" id="checkbox-group2"> Group 2</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="Group 3" id="checkbox-group3"> Group 3</p>
+                            <div>
+                                <p>Group(s):</p>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" class="" type="checkbox" name="group-checkbox" value="All groups" id="checkbox-all">
+                                    <label for="checkbox-all" class="add-to-group__label">All addresses</label>
+                                </div>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" type="checkbox" name="group-checkbox" value="Group 1" id="checkbox-group1">
+                                    <label for="checkbox-group1" class="add-to-group__label">Group 1</label>
+                                </div>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" type="checkbox" name="group-checkbox" value="Group 2" id="checkbox-group2">
+                                    <label for="checkbox-group2" class="add-to-group__label">Group 2</label>
+                                </div>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" type="checkbox" name="group-checkbox" value="Group 3" id="checkbox-group3">
+                                    <label for="checkbox-group3" class="add-to-group__label">Group 3</label>
+                                </div>
+                            </div>
 
-                            <input type="image" src="img/save.png" alt="save" class="button-save">
-                            <input type="image" src="img/cancel.jpg" alt="cancel" class="button-cancel">
+                            <input type="image" src="img/save.png" alt="save" class="button-save outline-none">
+                            <input type="image" src="img/cancel.jpg" alt="cancel" class="button-cancel outline-none">
                         </div>
                     </div>
                     <div id="address-wrapper">
-                        <div id="address-form-edit">
-                            <p class="input-field input-field-first">First and last name <input type="text" placeholder="First and last name" id="add-address-name-edit" class="add-address-fields"></p> <!-- labels! -->
-                            <p class="input-field">Phone <input type="text" placeholder="Phone" id="add-address-phone-edit" class="add-address-fields"></p>
-                            <p class="input-field">Address <input type="text" placeholder="Address" id="add-address-address-edit" class="add-address-fields"></p>
+                        <div class="address-form-edit bg-gray relative-margin">
+                            <div class="address-data">
+                                <div class="input-div">
+                                    <label for="add-address-name-edit" class="input-label">First and last name</label>
+                                    <input type="text" placeholder="First and last name" id="add-address-name-edit" class="add-address-fields address-form-edit__name">
+                                </div>
+                                <div class="input-div">
+                                    <label for="add-address-phone-edit" class="input-label">Phone</label>
+                                    <input type="text" placeholder="Phone" id="add-address-phone-edit" class="add-address-fields">
+                                </div>
+                                <div class="input-div">
+                                    <label for="add-address-address-edit" class="input-label">Address</label>
+                                    <input type="text" placeholder="Address" id="add-address-address-edit" class="add-address-fields">
+                                </div>
+                            </div>
 
-                            <p>Group(s)</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="All groups" id="checkbox-all"> All addresses</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="Group 1" id="checkbox-group1"> Group 1</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="Group 2" id="checkbox-group2"> Group 2</p>
-                            <p class="checkbox"><input type="checkbox" name="group-checkbox" value="Group 3" id="checkbox-group3"> Group 3</p>
+                            <div>
+                                <p>Group(s):</p>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" class="" type="checkbox" name="group-checkbox-edit" value="All groups" id="checkbox-all-edit">
+                                    <label for="checkbox-all-edit" class="add-to-group__label">All addresses</label>
+                                </div>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" type="checkbox" name="group-checkbox-edit" value="Group 1" id="checkbox-group1-edit">
+                                    <label for="checkbox-group1-edit" class="add-to-group__label">Group 1</label>
+                                </div>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" type="checkbox" name="group-checkbox-edit" value="Group 2" id="checkbox-group2-edit">
+                                    <label for="checkbox-group2-edit" class="add-to-group__label">Group 2</label>
+                                </div>
+                                <div class="add-to-group">
+                                    <input class="add-to-group__checkbox" type="checkbox" name="group-checkbox-edit" value="Group 3" id="checkbox-group3-edit">
+                                    <label for="checkbox-group3-edit" class="add-to-group__label">Group 3</label>
+                                </div>
+                            </div>
 
-                            <input type="image" src="img/save.png" alt="save" class="button-edit-save">
-                            <input type="image" src="img/cancel.jpg" alt="cancel" class="button-edit-cancel">
+                            <input type="image" src="img/save.png" alt="save" class="button-edit-save outline-none">
+                            <input type="image" src="img/cancel.jpg" alt="cancel" class="button-edit-cancel outline-none">
                         </div>
                     </div>
                 </div>
                 <div id="groups">
-                    <h2>Groups</h2>
-                    <div id="group-choice">
-                        <p><input type="checkbox" name="group-all" value="All groups"> All addresses</p>
-                        <p><input type="checkbox" name="group-1" value="Group 1"> Group 1</p>
-                        <p><input type="checkbox" name="group-2" value="Group 2"> Group 2</p>
-                        <p><input type="checkbox" name="group-3" value="Group 3"> Group 3</p>
+                    <h2 class="h2">Groups</h2>
+                    <div id="group-choice" class="bg-gray">
+                        <p>TBD</p>
+                        <p>TBD</p>
+                        <p>TBD</p>
                     </div>
                 </div>
             </div>

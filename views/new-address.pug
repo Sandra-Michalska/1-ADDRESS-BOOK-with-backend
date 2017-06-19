@@ -1,10 +1,9 @@
-div(class="address-div", id=addressData.addressDivId)
-    img(src="img/photo1.png", alt="photo1")
+div(class="address-div bg-gray relative-margin", id=addressData.addressDivId)
 
-    p.address-div-name= addressData.name
-    p.address-div-phone= addressData.phone
-    p.address-div-address= addressData.address
-    p Groups
+    p.address-div__text.address-div-name= addressData.name
+    p.address-div__text.address-div-phone= addressData.phone
+    p.address-div__text.address-div-address= addressData.address
+    p.address-div__text Groups
 
-    input(type="image", src="img/edit.jpg", alt="edit", class="button-edit")
-    input(type="image", src="img/delete.jpg", alt="delete", class="button-delete")
+    input(type="image", src="img/edit.jpg", alt="edit", class="button-edit outline-none")
+    input(type="image", src="img/delete.jpg", alt="delete", class="button-delete outline-none")

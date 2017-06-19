@@ -2,14 +2,14 @@
 function togglesAdd(addressForm, buttons, text) {
     $('.address-form-add').css('display', addressForm);
     $('.address-form-add__text').css('display', text);
-    $('#button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
+    $('.button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
 }
 
 // Show/hide HTML elements, disable/enable buttons (for editing addresses)
 function togglesEdit(editedAddress, editedAddressToggle, addressForm, buttons) {
     editedAddress.css('display', editedAddressToggle);
-    $('#address-form-edit').css('display', addressForm);
-    $('#button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
+    $('.address-form-edit').css('display', addressForm);
+    $('.button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
 }
 
 // Show or hide the "Add your first address" text
@@ -70,17 +70,17 @@ function editAddress(event) {
     var phone = $(editedAddress).children('.address-div-phone').text();
     var address = $(editedAddress).children('.address-div-address').text();
 
-    $('#add-address-name-edit').val(name);
+    $('.address-form-edit__name').val(name);
     $('#add-address-phone-edit').val(phone);
     $('#add-address-address-edit').val(address);
 
-    $(editedAddress).before($('#address-form-edit'));
+    $(editedAddress).before($('.address-form-edit'));
     togglesEdit(editedAddress, 'none', 'block', true);
 }
 
 // Save an edited address
 function editAddressSave(editedAddress) {
-    var nameChanged = $('#add-address-name-edit').val();
+    var nameChanged = $('.address-form-edit__name').val();
     var phoneChanged = $('#add-address-phone-edit').val();
     var addressChanged = $('#add-address-address-edit').val();
 
@@ -126,7 +126,7 @@ function sendDataToServer(addressData) {
 }
 
 $(document).ready(function() {
-    $('#button-add-address').on('click', addAddress);
+    $('.button-add-address').on('click', addAddress);
     $('.button-save').on('click', saveAddress);
     $('.button-cancel').on('click', addAddressCancel);
     $('.button-edit').on('click', editAddress);
