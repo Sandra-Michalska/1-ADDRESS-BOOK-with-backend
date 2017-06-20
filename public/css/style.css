@@ -130,11 +130,11 @@ input[type="checkbox"] {
 }
 
 .address-div__text {
-    margin-bottom: 0.4em;
+    margin: 0.7em 0;
 }
 
 .add-to-group__checkbox {
-    margin-bottom: 0.8em;
+    margin: 0 0.7em 0.7em 1.1em;
 }
 
 .input-div {

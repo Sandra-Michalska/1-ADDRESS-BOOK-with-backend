@@ -24,6 +24,23 @@ app.post('/', function(req, res) {
         addressDivId: req.body.addressDivId
     }
     res.render('new-address', { addressData });
+
+
+    // sqlite
+    db.serialize(function() {
+        // create table
+        db.run("CREATE TABLE IF NOT EXISTS addressData (name, phone, address, addressDivId)"); // text?
+
+        // create statement and add values
+        var stmt = db.prepare("INSERT INTO addressData VALUES (?, ?, ?, ?)");
+        stmt.run(addressData.name, addressData.phone, addressData.address, addressData.addressDivId);
+        stmt.finalize();
+
+        // retrieve values
+        db.each("SELECT name, phone, address, addressDivId FROM addressData", function(err, row) {
+            console.log(row);
+        });
+    });
 });
 
 app.listen(3000, function() {
