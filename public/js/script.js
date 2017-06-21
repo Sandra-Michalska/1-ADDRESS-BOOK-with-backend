@@ -39,13 +39,11 @@ function addAddressCancel() {
 }
 
 // Save an address
-var addressDivCounter = 0;
 function saveAddress(e) {
     var addressData = {
         name: $('#add-address-name').val(),
         phone: $('#add-address-phone').val(),
-        address: $('#add-address-address').val(),
-        addressDivId: 'address-div-' + addressDivCounter
+        address: $('#add-address-address').val()
     }
 
     if(!addressData.name || !addressData.phone || !addressData.address) {
@@ -107,7 +105,7 @@ var addressDivId;
 function sendDataToServer(addressData) {
     $.ajax({
         type: 'post',
-        url: 'http://localhost:3000',
+        url: 'http://localhost:3000/newaddress',
         data: addressData,
         dataType: 'html',
         error: function(jqXHR, textStatus, errorThrown) {
@@ -116,16 +114,28 @@ function sendDataToServer(addressData) {
         success: function(serverData) {
             console.log('Ajax success');
             $('#address-wrapper').prepend(serverData);
+        }
+    });
 
-            addressDivId = '#address-div-' + addressDivCounter;
-            $(addressDivId).children('.button-edit').on('click', editAddress);
-            $(addressDivId).children('.button-delete').on('click', deleteAddress);
-            addressDivCounter++;
+    $.ajax({
+        type: 'post',
+        url: 'http://localhost:3000/newaddressid',
+        data: addressData,
+        dataType: 'json',
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
+        },
+        success: function(serverData) {
+            console.log('Ajax success');
+            var id = '#' + serverData.rowid;
+            $(id).children('.button-edit').on('click', editAddress);
+            $(id).children('.button-delete').on('click', deleteAddress);
         }
     });
 }
 
 $(document).ready(function() {
+
     $('.button-add-address').on('click', addAddress);
     $('.button-save').on('click', saveAddress);
     $('.button-cancel').on('click', addAddressCancel);
