@@ -134,7 +134,24 @@ function sendDataToServer(addressData) {
     });
 }
 
+function getDataFromServer() {
+	$.ajax({
+        type: 'post',
+        url: 'http://localhost:3000/getdata',
+        dataType: 'html',
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
+        },
+        success: function(serverData) {
+            console.log('Ajax success');
+            console.log(serverData);
+            $('#address-wrapper').append(serverData);
+        }
+    });
+}
+
 $(document).ready(function() {
+    getDataFromServer();
 
     $('.button-add-address').on('click', addAddress);
     $('.button-save').on('click', saveAddress);

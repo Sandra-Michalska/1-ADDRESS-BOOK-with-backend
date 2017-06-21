@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var sqlite3 = require('sqlite3').verbose();
+var pug = require('pug');
 
 var db = new sqlite3.Database('database/db');
 var app = express();
@@ -23,10 +24,12 @@ app.post('/newaddress', function(req, res) {
         address: req.body.address
     }
 
-    db.run("INSERT INTO addressData (name, phone, address) VALUES (?, ?, ?)", (addressData.name), (addressData.phone), (addressData.address));
-    db.each("SELECT rowid, * FROM addressData WHERE rowid=(SELECT MAX(rowid) FROM addressData)", function(err, row) {
-        addressData.rowid = row.rowid;
-        res.render('new-address', { addressData });
+    db.serialize(function() {
+        db.run("INSERT INTO addressData (name, phone, address) VALUES (?, ?, ?)", (addressData.name), (addressData.phone), (addressData.address));
+        db.each("SELECT rowid, * FROM addressData WHERE rowid=(SELECT MAX(rowid) FROM addressData)", function(err, row) {
+            addressData.rowid = row.rowid;
+            res.render('new-address', { addressData });
+        });
     });
 });
 
@@ -34,6 +37,27 @@ app.post('/newaddressid', function(req, res) {
     db.each("SELECT rowid, * FROM addressData WHERE rowid=(SELECT MAX(rowid) FROM addressData)", function(err, row) {
         res.json({ rowid: row.rowid });
     });
+});
+
+app.post('/getdata', function(req, res) {
+    var addressDataRetrieved = [];
+    var html = '';
+    var counter = 0;
+
+        db.each("SELECT rowid, * FROM addressData ORDER BY rowid DESC", function(err, row) {
+            counter++;
+            console.log(counter);
+            addressDataRetrieved.address = row;
+            var address = addressDataRetrieved.address;
+
+            var fn = pug.compileFile('./views/new-addresses.pug', {});
+            html = html + fn({ address });
+
+        }, function() {
+            console.log('counter: ', counter);
+            res.send( html );
+        });
+
 });
 
 app.listen(3000, function() {
