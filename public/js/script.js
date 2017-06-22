@@ -55,14 +55,13 @@ function saveAddress(e) {
     } else {
         togglesAdd('none', false, 'none');
         clearFields();
-        sendDataToServer(addressData);
+        sendDataToDb(addressData);
     }
 }
 
 // Edit an address
 var editedAddress;
 function editAddress(event) {
-    console.log('edit');
     editedAddress = $(event.target).parent();
 
     var name = $(editedAddress).children('.address-div-name').text();
@@ -79,13 +78,17 @@ function editAddress(event) {
 
 // Save an edited address
 function editAddressSave(editedAddress) {
-    var nameChanged = $('.address-form-edit__name').val();
-    var phoneChanged = $('#add-address-phone-edit').val();
-    var addressChanged = $('#add-address-address-edit').val();
+    var dataToUpdate = {
+        nameUpdated: $('.address-form-edit__name').val(),
+        phoneUpdated: $('#add-address-phone-edit').val(),
+        addressUpdated: $('#add-address-address-edit').val(),
+        idToUpdate: editedAddress.attr('id')
+    };
+    updateAddressInDb(dataToUpdate);
 
-    $(editedAddress).children('p.address-div-name').text(nameChanged);
-    $(editedAddress).children('p.address-div-phone').text(phoneChanged);
-    $(editedAddress).children('p.address-div-address').text(addressChanged);
+    $(editedAddress).children('p.address-div-name').text(dataToUpdate.nameUpdated);
+    $(editedAddress).children('p.address-div-phone').text(dataToUpdate.phoneUpdated);
+    $(editedAddress).children('p.address-div-address').text(dataToUpdate.addressUpdated);
 
     togglesEdit(editedAddress, 'block', 'none', false);
 }
@@ -98,32 +101,14 @@ function editAddressCancel(editedAddress) {
 // Delete an address
 function deleteAddress(e) {
     $(e.target).parent().remove();
+    var idToDelete = $(e.target).parent().attr('id');
+    deleteAddressFromDb(idToDelete);
     firstAddressTextToggle();
 }
 
-// Send address data to the server
-var addressDivId;
-function sendDataToServer(addressData) {
+// Retrieve address data from the server
+function getDataFromDb() {
     $.ajax({
-        type: 'post',
-        url: 'http://localhost:3000/newaddress',
-        data: addressData,
-        dataType: 'json',
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
-        },
-        success: function(serverData) {
-            console.log('Ajax success');
-            $('#address-wrapper').prepend(serverData.templateChanged);
-            var id = '#' + serverData.rowid;
-            $(id).children('.button-edit').on('click', editAddress);
-            $(id).children('.button-delete').on('click', deleteAddress);
-        }
-    });
-}
-
-function getDataFromServer() {
-	$.ajax({
         type: 'post',
         url: 'http://localhost:3000/getdata',
         dataType: 'html',
@@ -140,8 +125,62 @@ function getDataFromServer() {
     });
 }
 
+// Send address data to the server
+function sendDataToDb(addressData) {
+    $.ajax({
+        type: 'post',
+        url: 'http://localhost:3000/newaddress',
+        data: addressData,
+        dataType: 'json',
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
+        },
+        success: function(serverData) {
+            console.log('Ajax success');
+            $('#address-wrapper').prepend(serverData.templateUpdated);
+            var id = '#' + serverData.rowid;
+            $(id).children('.button-edit').on('click', editAddress);
+            $(id).children('.button-delete').on('click', deleteAddress);
+        }
+    });
+}
+
+// Delete an address from the database
+function deleteAddressFromDb(idToDelete) {
+    var idToDelete = { idToDelete: idToDelete };
+
+    $.ajax({
+        type: 'post',
+        url: 'http://localhost:3000/deleteaddress',
+        data: idToDelete,
+        dataType: 'text',
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
+        },
+        success: function(serverData) {
+            console.log(serverData);
+        }
+    });
+}
+
+// Update an address in a database
+function updateAddressInDb(dataToUpdate) {
+    $.ajax({
+        type: 'post',
+        url: 'http://localhost:3000/updateaddress',
+        data: dataToUpdate,
+        dataType: 'text',
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
+        },
+        success: function(serverData) {
+            console.log(serverData);
+        }
+    });
+}
+
 $(document).ready(function() {
-    getDataFromServer();
+    getDataFromDb();
     $('.button-add-address').on('click', addAddress);
     $('.button-save').on('click', saveAddress);
     $('.button-cancel').on('click', addAddressCancel);
