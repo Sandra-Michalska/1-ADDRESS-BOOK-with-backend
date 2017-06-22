@@ -62,6 +62,7 @@ function saveAddress(e) {
 // Edit an address
 var editedAddress;
 function editAddress(event) {
+    console.log('edit');
     editedAddress = $(event.target).parent();
 
     var name = $(editedAddress).children('.address-div-name').text();
@@ -107,26 +108,13 @@ function sendDataToServer(addressData) {
         type: 'post',
         url: 'http://localhost:3000/newaddress',
         data: addressData,
-        dataType: 'html',
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
-        },
-        success: function(serverData) {
-            console.log('Ajax success');
-            $('#address-wrapper').prepend(serverData);
-        }
-    });
-
-    $.ajax({
-        type: 'post',
-        url: 'http://localhost:3000/newaddressid',
-        data: addressData,
         dataType: 'json',
         error: function(jqXHR, textStatus, errorThrown) {
             console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
         },
         success: function(serverData) {
             console.log('Ajax success');
+            $('#address-wrapper').prepend(serverData.templateChanged);
             var id = '#' + serverData.rowid;
             $(id).children('.button-edit').on('click', editAddress);
             $(id).children('.button-delete').on('click', deleteAddress);
@@ -144,20 +132,19 @@ function getDataFromServer() {
         },
         success: function(serverData) {
             console.log('Ajax success');
-            console.log(serverData);
             $('#address-wrapper').append(serverData);
+            $('.button-edit').on('click', editAddress);
+            $('.button-delete').on('click', deleteAddress);
+            firstAddressTextToggle();
         }
     });
 }
 
 $(document).ready(function() {
     getDataFromServer();
-
     $('.button-add-address').on('click', addAddress);
     $('.button-save').on('click', saveAddress);
     $('.button-cancel').on('click', addAddressCancel);
-    $('.button-edit').on('click', editAddress);
     $('.button-edit-save').on('click', function() { editAddressSave(editedAddress); });
     $('.button-edit-cancel').on('click', function() { editAddressCancel(editedAddress); });
-    $('.button-delete').on('click', deleteAddress);
 });

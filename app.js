@@ -28,36 +28,22 @@ app.post('/newaddress', function(req, res) {
         db.run("INSERT INTO addressData (name, phone, address) VALUES (?, ?, ?)", (addressData.name), (addressData.phone), (addressData.address));
         db.each("SELECT rowid, * FROM addressData WHERE rowid=(SELECT MAX(rowid) FROM addressData)", function(err, row) {
             addressData.rowid = row.rowid;
-            res.render('new-address', { addressData });
+            var fn = pug.compileFile('./views/new-address.pug');
+            var templateChanged = fn({ addressData });
+            res.send( {templateChanged: templateChanged, rowid: addressData.rowid} );
         });
-    });
-});
-
-app.post('/newaddressid', function(req, res) {
-    db.each("SELECT rowid, * FROM addressData WHERE rowid=(SELECT MAX(rowid) FROM addressData)", function(err, row) {
-        res.json({ rowid: row.rowid });
     });
 });
 
 app.post('/getdata', function(req, res) {
-    var addressDataRetrieved = [];
-    var html = '';
-    var counter = 0;
-
-        db.each("SELECT rowid, * FROM addressData ORDER BY rowid DESC", function(err, row) {
-            counter++;
-            console.log(counter);
-            addressDataRetrieved.address = row;
-            var address = addressDataRetrieved.address;
-
-            var fn = pug.compileFile('./views/new-addresses.pug', {});
-            html = html + fn({ address });
-
-        }, function() {
-            console.log('counter: ', counter);
-            res.send( html );
-        });
-
+    var templateChanged = '';
+    db.each("SELECT rowid, * FROM addressData ORDER BY rowid DESC", function(err, row) {
+        var addressData = row;
+        var fn = pug.compileFile('./views/new-addresses.pug');
+        templateChanged = templateChanged + fn({ addressData });
+    }, function() {
+        res.send( templateChanged );
+    });
 });
 
 app.listen(3000, function() {
