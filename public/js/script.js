@@ -2,7 +2,7 @@
 function togglesAdd(addressForm, buttons, text) {
     $('.address-form-add').css('display', addressForm);
     $('.address-form-add__text').css('display', text);
-    $('.button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
+    $('.button-add-address, .button-delete-addresses, .button-edit, .button-delete').prop('disabled', buttons);
 }
 
 // Show/hide HTML elements, disable/enable buttons (for editing addresses)
@@ -10,7 +10,7 @@ function togglesEdit(editedAddress, editedAddressToggle, addressForm, text, butt
     editedAddress.css('display', editedAddressToggle);
     $('.address-form-edit').css('display', addressForm);
     $('.address-form-edit__text').css('display', text);
-    $('.button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
+    $('.button-add-address, .button-delete-addresses, .button-edit, .button-delete').prop('disabled', buttons);
 }
 
 // Show or hide the "Add your first address" text
@@ -58,6 +58,10 @@ function saveAddress(e) {
         clearFields();
         sendDataToDb(addressData);
     }
+}
+
+function deleteAddressesFromDb() {
+
 }
 
 // Edit an address
@@ -120,6 +124,12 @@ function deleteAddress(e) {
     firstAddressTextToggle();
 }
 
+function deleteAddresses() {
+    $('.address-div').remove();
+    firstAddressTextToggle();
+    deleteAddressesFromDb();
+}
+
 // Retrieve address data from the server
 function getDataFromDb() {
     $.ajax({
@@ -177,6 +187,20 @@ function deleteAddressFromDb(idToDelete) {
     });
 }
 
+function deleteAddressesFromDb() {
+    $.ajax({
+        type: 'post',
+        url: 'http://localhost:3000/deleteaddresses',
+        dataType: 'text',
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
+        },
+        success: function(serverData) {
+            console.log(serverData);
+        }
+    });
+}
+
 // Update an address in a database
 function updateAddressInDb(dataToUpdate) {
     $.ajax({
@@ -196,6 +220,7 @@ function updateAddressInDb(dataToUpdate) {
 $(document).ready(function() {
     getDataFromDb();
     $('.button-add-address').on('click', addAddress);
+    $('.button-delete-addresses').on('click', deleteAddresses);
     $('.button-save').on('click', saveAddress);
     $('.button-cancel').on('click', addAddressCancel);
 });

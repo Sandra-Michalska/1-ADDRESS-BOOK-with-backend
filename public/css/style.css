@@ -14,6 +14,7 @@ body {
 .h2 {
     padding: 1.3em;
     letter-spacing: 0.03em;
+    display: inline-block;
 }
 
 .outline-none {
@@ -93,6 +94,16 @@ input[type="checkbox"] {
 }
 
 .button-add-address {
+    position: absolute;
+    top: 1.8em;
+    right: 25%;
+    padding: 0.7em;
+    font-size: 0.95em;
+    background-color: #93224B;
+    color: #fff;
+}
+
+.button-delete-addresses {
     position: absolute;
     top: 1.8em;
     right: 7%;

@@ -52,6 +52,11 @@ app.post('/deleteaddress', function(req, res) {
     res.send('The address was deleted from the db.');
 });
 
+app.post('/deleteaddresses', function(req, res) {
+    db.run("DELETE FROM addressData");
+    res.send('All addresses were deleted from the db.');
+});
+
 app.post('/updateaddress', function(req, res) {
     var dataToUpdate = req.body;
     db.run("UPDATE addressData SET name=?, phone=?, address=? WHERE rowid=?", dataToUpdate.nameUpdated, dataToUpdate.phoneUpdated, dataToUpdate.addressUpdated, dataToUpdate.idToUpdate);
