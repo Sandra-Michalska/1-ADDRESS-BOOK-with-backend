@@ -6,9 +6,10 @@ function togglesAdd(addressForm, buttons, text) {
 }
 
 // Show/hide HTML elements, disable/enable buttons (for editing addresses)
-function togglesEdit(editedAddress, editedAddressToggle, addressForm, buttons) {
+function togglesEdit(editedAddress, editedAddressToggle, addressForm, text, buttons) {
     editedAddress.css('display', editedAddressToggle);
     $('.address-form-edit').css('display', addressForm);
+    $('.address-form-edit__text').css('display', text);
     $('.button-add-address, .button-edit, .button-delete').prop('disabled', buttons);
 }
 
@@ -61,41 +62,54 @@ function saveAddress(e) {
 
 // Edit an address
 var editedAddress;
-function editAddress(event) {
-    editedAddress = $(event.target).parent();
+function editAddress(e) {
+    editedAddress = $(e.target).parent();
 
-    var name = $(editedAddress).children('.address-div-name').text();
-    var phone = $(editedAddress).children('.address-div-phone').text();
-    var address = $(editedAddress).children('.address-div-address').text();
+    var addressData = {
+        name: $(editedAddress).children('.address-div-name').text(),
+        phone: $(editedAddress).children('.address-div-phone').text(),
+        address: $(editedAddress).children('.address-div-address').text()
+    };
 
-    $('.address-form-edit__name').val(name);
-    $('#add-address-phone-edit').val(phone);
-    $('#add-address-address-edit').val(address);
+    $('#add-address-name-edit').val(addressData.name);
+    $('#add-address-phone-edit').val(addressData.phone);
+    $('#add-address-address-edit').val(addressData.address);
 
     $(editedAddress).before($('.address-form-edit'));
-    togglesEdit(editedAddress, 'none', 'block', true);
+    togglesEdit(editedAddress, 'none', 'block', 'none', true);
+
+    $('.button-edit-save').on('click', function() { editAddressSave(editedAddress, e); });
+    $('.button-edit-cancel').on('click', function() { editAddressCancel(editedAddress); });
 }
 
 // Save an edited address
-function editAddressSave(editedAddress) {
+function editAddressSave(editedAddress, e) {
+    displayOnce = 0;
     var dataToUpdate = {
-        nameUpdated: $('.address-form-edit__name').val(),
+        nameUpdated: $('#add-address-name-edit').val(),
         phoneUpdated: $('#add-address-phone-edit').val(),
         addressUpdated: $('#add-address-address-edit').val(),
         idToUpdate: editedAddress.attr('id')
     };
-    updateAddressInDb(dataToUpdate);
 
-    $(editedAddress).children('p.address-div-name').text(dataToUpdate.nameUpdated);
-    $(editedAddress).children('p.address-div-phone').text(dataToUpdate.phoneUpdated);
-    $(editedAddress).children('p.address-div-address').text(dataToUpdate.addressUpdated);
-
-    togglesEdit(editedAddress, 'block', 'none', false);
+    if(!dataToUpdate.nameUpdated || !dataToUpdate.phoneUpdated || !dataToUpdate.addressUpdated) {
+        if(displayOnce <= 0) {
+            togglesEdit(editedAddress, 'none', 'block', 'block', true);
+            displayOnce++;
+        }
+        e.preventDefault();
+    } else {
+        togglesEdit(editedAddress, 'block', 'none', 'none', false);
+        $(editedAddress).children('p.address-div-name').text(dataToUpdate.nameUpdated);
+        $(editedAddress).children('p.address-div-phone').text(dataToUpdate.phoneUpdated);
+        $(editedAddress).children('p.address-div-address').text(dataToUpdate.addressUpdated);
+        updateAddressInDb(dataToUpdate);
+    }
 }
 
 // Cancel editing an address
 function editAddressCancel(editedAddress) {
-    togglesEdit(editedAddress, 'block', 'none', false);
+    togglesEdit(editedAddress, 'block', 'none', 'none', false);
 }
 
 // Delete an address
@@ -184,6 +198,4 @@ $(document).ready(function() {
     $('.button-add-address').on('click', addAddress);
     $('.button-save').on('click', saveAddress);
     $('.button-cancel').on('click', addAddressCancel);
-    $('.button-edit-save').on('click', function() { editAddressSave(editedAddress); });
-    $('.button-edit-cancel').on('click', function() { editAddressCancel(editedAddress); });
 });

@@ -118,7 +118,8 @@ input[type="checkbox"] {
     display: none;
 }
 
-.address-form-add__text {
+.address-form-add__text,
+.address-form-edit__text {
     padding-bottom: 1em;
     color: #ff0000;
     font-weight: 700;
