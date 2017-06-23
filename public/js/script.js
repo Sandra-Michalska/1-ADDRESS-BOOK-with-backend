@@ -140,7 +140,7 @@ function getDataFromDb() {
             console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
         },
         success: function(serverData) {
-            console.log('Ajax success');
+            console.log('Address data were loaded from the db.');
             $('#address-wrapper').append(serverData);
             $('.button-edit').on('click', editAddress);
             $('.button-delete').on('click', deleteAddress);
@@ -160,7 +160,7 @@ function sendDataToDb(addressData) {
             console.log('Ajax error: ' + textStatus + '\n' + errorThrown);
         },
         success: function(serverData) {
-            console.log('Ajax success');
+            console.log('Address data were sent to the db.');
             $('#address-wrapper').prepend(serverData.templateUpdated);
             var id = '#' + serverData.rowid;
             $(id).children('.button-edit').on('click', editAddress);

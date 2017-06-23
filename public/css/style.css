@@ -1,3 +1,5 @@
+/* less for colours */
+
 /* general */
 body {
     margin: 0;
@@ -14,7 +16,6 @@ body {
 .h2 {
     padding: 1.3em;
     letter-spacing: 0.03em;
-    display: inline-block;
 }
 
 .outline-none {
@@ -22,12 +23,16 @@ body {
 }
 
 .border {
-    border: 1px solid #a26b6b;
+    border: 1px solid #b77e7e;
     border-radius: 2px;
 }
 
 .bg-gray {
     background: #e8e8e8;
+}
+
+.bg-form {
+    background: #dcf2fd;
 }
 
 .relative-margin {
@@ -45,7 +50,7 @@ input[type="checkbox"] {
 /* header */
 .header {
     margin-bottom: 2em;
-    background: #93224b;
+    background: #a73760;
     position: relative;
 }
 
@@ -85,7 +90,7 @@ input[type="checkbox"] {
     font-style: italic;
     font-weight: 400;
     line-height: 2em;
-    color: #93224b;
+    color: #a73760;
     display: block;
 }
 
@@ -99,7 +104,7 @@ input[type="checkbox"] {
     right: 25%;
     padding: 0.7em;
     font-size: 0.95em;
-    background-color: #93224B;
+    background-color: #a73760;
     color: #fff;
 }
 
@@ -109,13 +114,13 @@ input[type="checkbox"] {
     right: 7%;
     padding: 0.7em;
     font-size: 0.95em;
-    background-color: #93224B;
+    background-color: #a73760;
     color: #fff;
 }
 
 .add-address-fields {
     position: absolute;
-    right: 10%;
+    right: 7%;
     padding: 5.2px;
     font-size: 0.9em;
     border: 1px solid #5a4f4f;
@@ -125,20 +130,22 @@ input[type="checkbox"] {
 
 .address-form-add,
 .address-form-edit {
-    padding: 2.2em 4em;
+    padding: 1.3em 4em;
     display: none;
+    border: 1px solid #dbf1fd;
 }
 
 .address-form-add__text,
 .address-form-edit__text {
     padding-bottom: 1em;
-    color: #ff0000;
+    color: #c51b11;
     font-weight: 700;
     display: none;
 }
 
 .address-div {
     padding: 1em 4em;
+    border: 1px solid #fffefe;
 }
 
 .address-div__text {
@@ -160,28 +167,28 @@ input[type="checkbox"] {
 
 .button-edit {
     position: absolute;
-    top: 2.5em;
-    right: 16.5em;
+    top: 2em;
+    right: 4.5em;
 }
 
 .button-delete {
     position: absolute;
-    top: 2.5em;
-    right: 14em;
+    top: 2em;
+    right: 2em;
 }
 
 .button-save,
 .button-edit-save {
     position: absolute;
-    bottom: 2.5em;
-    left: 60%;
+    bottom: 2em;
+    right: 7%;
 }
 
 .button-cancel,
 .button-edit-cancel {
     position: absolute;
-    bottom: 2.5em;
-    left: 70%;
+    top: 2em;
+    left: 1.5em;
 }
 
 /* GROUPS */
