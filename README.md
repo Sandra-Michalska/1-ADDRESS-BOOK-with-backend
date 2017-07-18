@@ -15,3 +15,5 @@ Some of the changes compared to Address book 1.0:
 Even though I felt the need and would love to focus on things like React, Webpack and Babel, my goal this time was to code something useful without frameworks and too much additional stuff. However, once I deal with vanilla JS, how browsers work and other basics I'm working on, React+Redux, plus e.g. LESS and BEM, will be my dream stack.
 
 To run the project you have to install node.js, and then run npm install and node app.js.
+
+![screen](/screen.png)
