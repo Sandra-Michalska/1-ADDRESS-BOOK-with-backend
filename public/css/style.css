@@ -32,7 +32,7 @@ body {
 }
 
 .bg-form {
-    background: #dcf2fd;
+    background: #e5f5fd;
 }
 
 .relative-margin {
@@ -132,7 +132,7 @@ input[type="checkbox"] {
 .address-form-edit {
     padding: 1.3em 4em;
     display: none;
-    border: 1px solid #dbf1fd;
+    border: 1px solid #dff4ff;
 }
 
 .address-form-add__text,
