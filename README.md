@@ -1,4 +1,4 @@
-# 1-ADDRESS-BOOK-with-backend
+# ADDRESS-BOOK-with-backend
 
 An improved version of the first Address book project, this time with a database.
 
